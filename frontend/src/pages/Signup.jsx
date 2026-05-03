@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
+import API from '../utils/API';
+import { useNavigate } from "react-router-dom";
 
 
 
 const Signup = () => {
   
+   const navigate = useNavigate();
 
    const [formData, setFormData] = useState({
     name: '',
@@ -23,11 +26,14 @@ const Signup = () => {
     setSubmitError('');
      
     try {
-         // APi from backend
-         console.log(formData);
-         setSuccess(true);
+         const res = await API.post("/auth/signup", formData)
+        // setSuccess(true);
+      
+              navigate("/login"); // Redirect to login after successful signup
     } catch (error) {
-         setSubmitError("Something went wrong");
+         setSubmitError(
+          error.response?.data?.message || "Something went wrong"
+        );
     } finally {
         setLoading(false);
     }
@@ -127,6 +133,8 @@ const Signup = () => {
          </div>
     </div>
   )
+
+
 }
 
 export default Signup

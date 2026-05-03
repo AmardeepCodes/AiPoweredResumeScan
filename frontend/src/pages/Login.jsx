@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import API from '../utils/API';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -11,22 +16,36 @@ const Login = () => {
   const [submitError, setSubmitError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleChange = (e) => {
+
+  const handleSubmit = async (e) => {
+       e.preventDefault();
+       setLoading(true);
+       setSubmitError("");
+     try {
+       const res = await API.post("/auth/login", formData);
+
+        // setSuccess(true);
+        navigate("/dashboard"); // Redirect to dashboard after successful login
+      
+     } catch (error) {
+       setSubmitError(
+         error.response?.data?.message || "Something went wrong"
+       );
+     }
+
+    }
+
+       const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-    }, 1500);
-  };
+
+   
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0b1220] to-[#0f1a2e] flex items-center justify-center text-white">

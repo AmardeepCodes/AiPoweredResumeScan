@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { registerHandler } from "../controllers/auth/auth.controller";
+import { registerHandler, loginHandler,verifyEmailHandler, refreshHandler, logoutHandler} from "../controllers/auth/auth.controller.js";
 const router = Router();
 
 
 
-router.post('/register', registerHandler);
+router.post('/signup', registerHandler);
 router.post('/login', loginHandler);
 router.get('/verify-email', verifyEmailHandler);
+router.post('/refresh', refreshHandler);
+router.post('/logout', logoutHandler);
+
+export default router;

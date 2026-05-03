@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { createAccessToken } from './token';
+
 
 //   userId: String,
 //    role: "user" | "admin",
@@ -33,11 +33,11 @@ export function verifyAccessToken(token)
 export function createRefreshToken(userId, tokenVersion){
     const payload = {sub: userId, tokenVersion};
 
-    return jwt.sign(payload, process.env.JWT_REFRESH_SECRET,{
+    return jwt.sign(payload, process.env.JWT_ACCESS_SECRET,{
         expiresIn: '7d'
     })
 }
 
 export function verifyRefreshToken(token){
-    return jwt.verify(token, process.env.JWT_REFRESH_SECRET)
+    return jwt.verify(token, process.env.JWT_ACCESS_SECRET)
 }

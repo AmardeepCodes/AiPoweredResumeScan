@@ -1,10 +1,4 @@
-
-
-
-
-
-
-
+import { Link } from "react-router-dom";
 
 
 
@@ -14,23 +8,34 @@ export default function LandingPage() {
     <div className="bg-[#020617] text-white min-h-screen">
 
       {/* NAVBAR */}
-      <nav className="flex items-center justify-between px-8 py-4 border-b border-gray-800">
-        <h1 className="font-semibold text-lg">JustCareer AI</h1>
+    <nav className="flex items-center justify-between px-8 py-4 border-b border-gray-800">
+  <h1 className="font-semibold text-lg">JustCareer AI</h1>
 
-        <div className="flex items-center gap-6 text-sm text-gray-400">
-          <span className="text-white">Dashboard</span>
-          <span className="hover:text-white cursor-pointer">Analyze Resume</span>
-          <span className="hover:text-white cursor-pointer">Job Match</span>
-        </div>
+  <div className="flex items-center gap-6 text-sm text-gray-400">
+    <Link to="/dashboard" className="hover:text-white">Dashboard</Link>
+    <Link to="/analyze" className="hover:text-white">Analyze Resume</Link>
+    <Link to="/job-match" className="hover:text-white">Job Match</Link>
+  </div>
 
-        <div className="flex items-center gap-4">
-          <span>🔔</span>
-          <span>⚙️</span>
-          <button className="px-4 py-1.5 bg-purple-600 rounded-lg text-sm">
-            Upgrade
-          </button>
-        </div>
-      </nav>
+  <div className="flex items-center gap-4">
+    <span>🔔</span>
+    <span>⚙️</span>
+
+    {/* Login */}
+    <Link to="/login">
+      <button className="px-4 py-1.5 border border-gray-600 rounded-lg text-sm hover:bg-gray-800">
+        Login
+      </button>
+    </Link>
+
+    {/* Signup */}
+    <Link to="/signup">
+      <button className="px-4 py-1.5 bg-purple-600 rounded-lg text-sm hover:bg-purple-700">
+        Sign Up
+      </button>
+    </Link>
+  </div>
+</nav>
 
       {/* HERO */}
       <section className="text-center py-20 px-6">
